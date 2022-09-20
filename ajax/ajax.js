@@ -186,4 +186,8 @@ class Ajax {
 
     this.xhr.setRequestHeader("Content-Type", contentType);
   }
+  // 獲取 XHR 對象
+  getXHR() {
+    return this.xhr;
+  }
 }
