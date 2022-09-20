@@ -2,58 +2,44 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>封裝 Ajax</title>
+    <title>封装 Ajax</title>
   </head>
   <body>
     <script type="module">
-      // const url = 'https://www.imooc.com/api/http/search/suggest?words=js';
-      // const xhr = new XMLHttpRequest();
-      // xhr.addEventListener(
-      //   'load',
-      //   () => {
-      //     if ((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304) {
-      //       console.log(xhr.responseText);
-      //     }
-      //   },
-      //   false
-      // );
-      // xhr.open('GET', url, true);
-      // xhr.send(null);
-
       import { ajax, get, getJSON, post } from './ajax/index.js';
 
       const url = 'https://www.imooc.com/api/http/search/suggest?words=js';
       // const url = 'https://www.iimooc.com/api/http/search/suggest?words=js';
 
-      // const url = './414.html';
-
-      const xhr = ajax(url, {
-        method: 'GET',
+      const p = getJSON(url, {
         params: { username: 'BigD' },
-        data: {
-          age: 22
-        },
-        responseType: 'json',
-        // timeoutTime: 10,
+        data: { age:22 }
+        // timeoutTime: 10
+        // success(){},error(){}
+      });
+      p.xhr.abort();
 
-        success(response) {
-          console.log(response);
-        },
-        httpCodeError(err) {
-          console.log('http code error', err);
-        },
-        error(xhr) {
-          console.log('error', xhr);
-        },
-        abort(xhr) {
-          console.log('abort', xhr);
-        },
-        timeout(xhr) {
-          console.log('timeout', xhr);
+      const { ERROR_HTTP_CODE, ERROR_REQUEST, ERROR_TIMEOUT, ERROR_ABORT } = p;
+
+      p.then(repsonse => {
+        console.log(repsonse);
+      }).catch(err => {
+        // console.log(err);
+        switch (err.type) {
+          case ERROR_HTTP_CODE:
+            console.log(err.text);
+            break;
+          case ERROR_REQUEST:
+            console.log(err.text);
+            break;
+          case ERROR_TIMEOUT:
+            console.log(err.text);
+            break;
+          case ERROR_ABORT:
+            console.log(err.text);
+            break;
         }
       });
-
-      xhr.abort();
     </script>
   </body>
 </html>
