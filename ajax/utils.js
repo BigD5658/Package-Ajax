@@ -24,4 +24,10 @@ const addURLData = (url, data) => {
 
   return `${mark}${data}`;
 };
-export { serialize, addURLData };
+
+// 數據序列化成 JSON 格式的字符串
+const serializeJSON = (param) => {
+  return JSON.stringify(param);
+};
+
+export { serialize, addURLData, serializeJSON };
