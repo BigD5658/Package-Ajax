@@ -1,3 +1,6 @@
+// 引入工具函數
+import { serialize, addURLData } from "./utils.js";
+
 import DEFAULTS from "./defaults.js";
 //Ajax class
 class Ajax {
@@ -21,6 +24,14 @@ class Ajax {
 
     //綁定響應事件處理程序
     this.bindEvents();
+    //他原本是xhr.open('GET', url, true); 'GET'要替換成defaults裡面預設的method: "GET",
+    //url +addParam是為了在requestHeader上攜帶資料它可以把json格式轉換為一般的值敘式
+    // params: {
+    //   username: 'BigD',
+    //   age: 22
+    // }
+    // username=BigD&age=22 值敘式放在URL後面  轉換的方法寫在addParam()裡面
+    xhr.open(this.options.method, this.url + this.addParam(), true);
   }
 
   bindEvents() {
@@ -68,5 +79,13 @@ class Ajax {
   ok() {
     const xhr = this.xhr;
     return (xhr.status >= 200 && xhr.status < 300) || xhr.status === 304;
+  }
+  //在URL上添加數據
+  addParam() {
+    const { params } = this.options; //從上面解構附值的options撈出params處理
+
+    if (!params) return ""; //如果params 拿到預設的null就回傳""空的
+
+    return addURLData(this.url, serialize(params));
   }
 }
