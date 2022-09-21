@@ -169,12 +169,9 @@ class Ajax {
   }
   // 是否發送 application/x-www-form-urlencoded 格式的數據
   isFormURLEncodedData() {
-    return (
-      this.options.contentType
-        .toLowerCase()
-        //有可能CONTENT_TYPE_FORM_URLENCODED的參數url會變動
-        .includes(CONTENT_TYPE_FORM_URLENCODED)
-    );
+    return this.options.contentType
+      .toLowerCase()
+      .includes(CONTENT_TYPE_FORM_URLENCODED);
   }
   // 是否發送 application/json 格式的數據
   isJSONData() {
