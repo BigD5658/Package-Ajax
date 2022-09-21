@@ -3,7 +3,7 @@ import { HTTP_GET, CONTENT_TYPE_FORM_URLENCODED } from "./constants.js";
 
 //設置默認參數
 const DEFAULTS = {
-  method: "HTTP_GET",
+  method: HTTP_GET,
   //params來接收數量不固定的方法參數,這邊拿來接收requestHeader的資訊
   params: null,
   //Message Body可以接收一般json格是或是FormData格式
@@ -26,3 +26,4 @@ const DEFAULTS = {
   abort() {}, //被終止
   timeout() {}, //超時連接
 };
+export default DEFAULTS;

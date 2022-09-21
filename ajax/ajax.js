@@ -6,7 +6,7 @@ import {
 } from "./constants.js";
 
 // 引入工具函數
-import { serialize, addURLData } from "./utils.js";
+import { serialize, addURLData, serializeJSON } from "./utils.js";
 
 import DEFAULTS from "./defaults.js";
 //Ajax class
@@ -24,7 +24,7 @@ class Ajax {
   }
 
   //初始化
-  this() {
+  init() {
     const xhr = new XMLHttpRequest();
 
     this.xhr = xhr; //讓別的function也可以訪問這個xhr
@@ -191,3 +191,4 @@ class Ajax {
     return this.xhr;
   }
 }
+export default Ajax;
